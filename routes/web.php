@@ -1,0 +1,18 @@
+<?php
+
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SiswaController;
+use Illuminate\Support\Facades\Route;
+
+Route::get('/', [HomeController::class, 'index']);
+Route::get('/pendaftaran', [HomeController::class, 'pendaftaran']);
+Route::post('/pendaftaran/simpan', [HomeController::class, 'simpanPendaftaran']);
+Route::get('/dashboard', [HomeController::class, 'dashboard']);
+
+Route::get('/siswa', [SiswaController::class, 'index']);
+Route::get('/siswa/tambah', [SiswaController::class, 'create']);
+Route::post('/siswa/store', [SiswaController::class, 'store']);
+Route::get('/siswa/edit/{id}', [SiswaController::class, 'edit']);
+Route::put('/siswa/update/{id}', [SiswaController::class, 'update']);
+Route::get('/siswa/hapus/{id}', [SiswaController::class, 'delete']);
+Route::delete('/siswa/destroy/{id}', [SiswaController::class, 'destroy']);
