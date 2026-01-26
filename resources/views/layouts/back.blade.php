@@ -95,10 +95,8 @@
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-end shadow">
                                     <div class="px-3 py-2 border-bottom">
-                                        <p class="mb-0 fw-semibold">Admin</p>
-                                        <small class="text-muted">admin@example.com</small>
-                                        {{-- <p class="mb-0 fw-semibold">{{ Auth::user()->name }}</p> --}}
-                                        {{-- <small class="text-muted">{{ Auth::user()->email }}</small> --}}
+                                        <p class="mb-0 fw-semibold">{{ Auth::user()->name }}</p>
+                                        <small class="text-muted">{{ Auth::user()->email }}</small>
                                     </div>
                                     <a class="dropdown-item" href="{{ url('/pengaturan-akun') }}">
                                         <i class="bi bi-gear me-2"></i>Pengaturan Akun
