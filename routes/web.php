@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SiswaController;
 use Illuminate\Support\Facades\Route;
@@ -8,6 +9,10 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/pendaftaran', [HomeController::class, 'pendaftaran']);
 Route::post('/pendaftaran/simpan', [HomeController::class, 'simpanPendaftaran']);
 Route::get('/dashboard', [HomeController::class, 'dashboard']);
+
+Route::get('/login', [AuthController::class, 'login']);
+Route::post('/login', [AuthController::class, 'authenticate']);
+Route::get('/logout', [AuthController::class, 'logout']);
 
 Route::get('/siswa', [SiswaController::class, 'index']);
 Route::get('/siswa/tambah', [SiswaController::class, 'create']);

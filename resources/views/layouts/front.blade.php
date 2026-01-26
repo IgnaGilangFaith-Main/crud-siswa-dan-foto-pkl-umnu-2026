@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Pendaftaran Siswa Kursus | @yield('title')</title>
+    <title>Pendaftaran Siswa PKL | @yield('title')</title>
     <link rel="shortcut icon" href="{{ asset('icon/icon1.png') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ url('/bootstrap-5.3.8-dist/css/bootstrap.min.css') }}" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -35,11 +35,11 @@
                             <a class="nav-link" aria-current="page" href="{{ url('/') }}">Home</a>
                         </li>
                         <li class="nav-item">
-                            {{-- @if (auth()->check())
+                            @if (auth()->check())
                                 <a class="nav-link" href="{{ url('/dashboard') }}">Dashboard</a>
                             @else
                                 <a class="nav-link" href="{{ url('/login') }}">Login</a>
-                            @endif --}}
+                            @endif
                         </li>
                     </ul>
                 </div>
