@@ -60,7 +60,7 @@
                 <div class="nav-section-title">Pengaturan</div>
             </div>
 
-            <a href="#" class="sidebar-link {{ request()->is('pengaturan-akun*') ? 'active' : '' }}">
+            <a href="{{ url('/akun') }}" class="sidebar-link {{ request()->is('akun*') ? 'active' : '' }}">
                 <i class="bi bi-gear"></i>
                 <span>Pengaturan Akun</span>
             </a>
@@ -98,7 +98,7 @@
                                         <p class="mb-0 fw-semibold">{{ Auth::user()->name }}</p>
                                         <small class="text-muted">{{ Auth::user()->email }}</small>
                                     </div>
-                                    <a class="dropdown-item" href="{{ url('/pengaturan-akun') }}">
+                                    <a class="dropdown-item" href="{{ url('/akun') }}">
                                         <i class="bi bi-gear me-2"></i>Pengaturan Akun
                                     </a>
                                     <div class="dropdown-divider"></div>

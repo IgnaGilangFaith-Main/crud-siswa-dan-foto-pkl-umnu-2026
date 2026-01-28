@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index']);
@@ -22,4 +23,8 @@ Route::middleware('auth')->group(function () {
     Route::put('/siswa/update/{id}', [SiswaController::class, 'update']);
     Route::get('/siswa/hapus/{id}', [SiswaController::class, 'delete']);
     Route::delete('/siswa/destroy/{id}', [SiswaController::class, 'destroy']);
+
+    Route::get('/akun', [UserController::class, 'index']);
+    Route::get('/akun/edit/{id}', [UserController::class, 'edit']);
+    Route::put('/akun/update/{id}', [UserController::class, 'update']);
 });

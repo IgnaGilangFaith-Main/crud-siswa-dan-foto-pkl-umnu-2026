@@ -9,7 +9,7 @@
 @section('content')
     <div class="card stat-card">
         <div class="card-header bg-white py-3">
-            <div class="d-flex justify-content-between align-items">
+            <div class="d-flex justify-content-between align-items-center">
                 <h5 class="mb-0">
                     <i class="bi bi-person-vcard me-2"></i>Daftar Siswa
                 </h5>
