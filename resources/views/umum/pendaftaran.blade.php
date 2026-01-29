@@ -103,7 +103,7 @@
                             <i class="bi bi-arrow-left me-1"></i> Kembali
                         </a>
                         <button type="submit" class="btn btn-success mx-2">
-                            <i class="bi bi-save me-1"></i> Simpan
+                            <i class="bi bi-save me-1"></i> Daftar
                         </button>
                     </center>
                 </div>
