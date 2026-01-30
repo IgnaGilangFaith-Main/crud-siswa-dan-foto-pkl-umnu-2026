@@ -8,9 +8,22 @@ use Illuminate\Http\Request;
 
 class SiswaController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $data = Siswa::latest()->paginate(5);
+        $cari = $request->cari;
+        if (! empty($cari)) {
+            $data = Siswa::latest()
+                ->where(function ($query) use ($cari) {
+                    if ($cari) {
+                        $query->where('nama', 'like', '%'.$cari.'%')
+                            ->orWhere('kelas', 'like', '%'.$cari.'%')
+                            ->orWhere('jurusan', 'like', '%'.$cari.'%');
+                    }
+                })
+                ->paginate(10);
+        } else {
+            $data = Siswa::latest()->paginate(10);
+        }
 
         return view('siswa.index', ['data' => $data]);
     }

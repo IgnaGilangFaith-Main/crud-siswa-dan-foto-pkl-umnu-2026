@@ -89,8 +89,7 @@
                             <div class="dropdown">
                                 <button class="btn btn-link text-dark p-0 d-flex align-items-center gap-2"
                                     data-bs-toggle="dropdown">
-                                    <span class="d-none d-md-inline">Admin</span>
-                                    {{-- <span class="d-none d-md-inline">{{ Auth::user()->name }}</span> --}}
+                                    <span class="d-none d-md-inline">{{ Auth::user()->name }}</span>
                                     <i class="bi bi-chevron-down small"></i>
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-end shadow">

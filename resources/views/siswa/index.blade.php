@@ -19,33 +19,35 @@
             </div>
         </div>
         <div class="card-body">
-            @if ($data->isEmpty())
-                <div class="text-center py-5">
-                    <i class="bi bi-person-vcard text-muted" style="font-size: 4rem;"></i>
-                    <h5 class="mt-3 text-muted">Belum ada siswa</h5>
-                    <p class="text-muted">Silakan tambahkan siswa yang ingin Anda daftarkan.</p>
-                    <a href="{{ url('/siswa/tambah') }}" class="btn btn-primary">
-                        <i class="bi bi-plus-circle me-1"></i> Tambah Siswa
-                    </a>
-                </div>
-            @else
-                <div class="table-responsive">
-                    <table class="table table-striped table-bordered table-hover">
-                        <thead>
-                            <tr class="text-center">
-                                <th>No</th>
-                                <th>Nama</th>
-                                <th>Kelas</th>
-                                <th>Jurusan</th>
-                                <th>Jenis Kelamin</th>
-                                <th>Tempat Lahir</th>
-                                <th>Tanggal Lahir</th>
-                                <th>Alamat</th>
-                                <th>Foto</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+            <div class="col-12 col-sm-8 col-md-4 mb-3">
+                <label for="" class="mb-2">Cari Data</label>
+                <form action="{{ url('/siswa') }}" method="get">
+                    <div class="input-group">
+                        <input type="text" class="form-control ml-2" name="cari"
+                            placeholder="Nama siswa, kelas, dan jurusan." required>
+                        <button type="submit" class="btn btn-primary"><i class="bi bi-search"></i> Cari</button>
+                        <a href="{{ url('/siswa') }}" class="btn btn-danger">Batal</a>
+                    </div>
+                </form>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr class="text-center">
+                            <th>No</th>
+                            <th>Nama</th>
+                            <th>Kelas</th>
+                            <th>Jurusan</th>
+                            <th>Jenis Kelamin</th>
+                            <th>Tempat Lahir</th>
+                            <th>Tanggal Lahir</th>
+                            <th>Alamat</th>
+                            <th>Foto</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if ($data->count() > 0)
                             @foreach ($data as $datum)
                                 <tr>
                                     <td class="text-center">
@@ -74,11 +76,15 @@
                                     </td>
                                 </tr>
                             @endforeach
-                        </tbody>
-                    </table>
-                    {{ $data->appends(request()->query())->links() }}
-                </div>
-            @endif
+                        @else
+                            <tr>
+                                <td colspan="10" class="text-center">Data tidak ditemukan.</td>
+                            </tr>
+                        @endif
+                    </tbody>
+                </table>
+                {{ $data->appends(request()->query())->links() }}
+            </div>
         </div>
     </div>
 @endsection
