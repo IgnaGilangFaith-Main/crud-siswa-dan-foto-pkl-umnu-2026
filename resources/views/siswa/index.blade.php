@@ -19,14 +19,30 @@
             </div>
         </div>
         <div class="card-body">
-            <div class="col-12 col-sm-8 col-md-4 mb-3">
-                <label for="" class="mb-2">Cari Data</label>
+            <div class="col-12 col-md-6 mb-3">
+                <label for="cari" class="mb-2">Cari Data</label>
                 <form action="{{ url('/siswa') }}" method="get">
                     <div class="input-group">
-                        <input type="text" class="form-control ml-2" name="cari"
-                            placeholder="Nama siswa, kelas, dan jurusan." required>
+                        <input type="text" class="form-control ml-2" name="cari" id="cari"
+                            value="{{ request('cari') }}" placeholder="Nama siswa, kelas, dan jurusan." required>
                         <button type="submit" class="btn btn-primary"><i class="bi bi-search"></i> Cari</button>
                         <a href="{{ url('/siswa') }}" class="btn btn-danger">Batal</a>
+                    </div>
+                </form>
+            </div>
+            <hr>
+            <div class="col-12 col-md-6 mb-3">
+                <label for="" class="mb-2">Export data ke Excel</label>
+                <form action="{{ url('/siswa/export') }}" method="post">
+                    @csrf
+                    <div class="input-group">
+                        <span class="input-group-text">Dari tanggal : </span>
+                        <input type="date" class="form-control" name="from" required>
+                        <span class="input-group-text">Sampai tanggal : </span>
+                        <input type="date" class="form-control" name="to" required>
+                        <button type="submit" class="btn btn-success">
+                            <i class="bi bi-file-earmark-excel"></i> Export
+                        </button>
                     </div>
                 </form>
             </div>

@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Siswa;
+use DateTime;
 use Exception;
 use Illuminate\Http\Request;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class SiswaController extends Controller
 {
@@ -154,5 +157,67 @@ class SiswaController extends Controller
             // kembalikan file lama jika ada error saat upload
             return $oldFile;
         }
+    }
+
+    public function exportExcel(Request $request)
+    {
+        $from = $request->from;
+        $to = $request->to;
+
+        $sql = Siswa::latest()
+            ->whereDate('created_at', '>=', $from)
+            ->whereDate('created_at', '<=', $to)
+            ->get();
+
+        $filename = "Laporan_Daftar_Siswa_{$from}_sampai_{$to}.xlsx";
+
+        $spreadsheet = new Spreadsheet;
+        $sheet = $spreadsheet->getActiveSheet();
+        $no = 1;
+        $rows = 2;
+
+        $sheet->setCellValue('A1', 'No');
+        $sheet->setCellValue('B1', 'Nama');
+        $sheet->setCellValue('C1', 'Kelas');
+        $sheet->setCellValue('D1', 'Jurusan');
+        $sheet->setCellValue('E1', 'Jenis Kelamin');
+        $sheet->setCellValue('F1', 'Tempat Lahir');
+        $sheet->setCellValue('G1', 'Tanggal Lahir');
+        $sheet->setCellValue('H1', 'Alamat');
+        // kasih jarak 1 baris di excel
+        $sheet->setCellValue('J1', 'Jumlah Siswa Laki-laki');
+        $sheet->setCellValue('K1', 'Jumlah Siswa Perempuan');
+        $sheet->setCellValue('L1', 'Total Siswa');
+
+        foreach ($sql as $data) {
+            $sheet->setCellValue('A'.$rows, $no++);
+            $sheet->setCellValue('B'.$rows, $data->nama);
+            $sheet->setCellValue('C'.$rows, $data->kelas);
+            $sheet->setCellValue('D'.$rows, $data->jurusan);
+            $sheet->setCellValue('E'.$rows, $data->jenis_kelamin);
+            $sheet->setCellValue('F'.$rows, $data->tempat_lahir);
+            // Format tanggal lahir
+            $dateLahir = new DateTime($data->tanggal_lahir);
+            $tglLahir = date_format($dateLahir, 'd/m/Y');
+            $sheet->setCellValue('G'.$rows, $tglLahir);
+
+            $sheet->setCellValue('H'.$rows, $data->alamat);
+            $rows++;
+        }
+
+        $jumlahLaki = $sql->where('jenis_kelamin', 'Laki-laki')->count();
+        $jumlahPerempuan = $sql->where('jenis_kelamin', 'Perempuan')->count();
+        $totalSiswa = $sql->count();
+
+        $sheet->setCellValue('J2', $jumlahLaki);
+        $sheet->setCellValue('K2', $jumlahPerempuan);
+        $sheet->setCellValue('L2', $totalSiswa);
+
+        $writer = new Xlsx($spreadsheet);
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="'.$filename.'"');
+        header('Cache-Control: max-age=0');
+
+        $writer->save('php://output');
     }
 }

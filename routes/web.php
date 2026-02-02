@@ -23,6 +23,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/siswa/update/{id}', [SiswaController::class, 'update']);
     Route::get('/siswa/hapus/{id}', [SiswaController::class, 'delete']);
     Route::delete('/siswa/destroy/{id}', [SiswaController::class, 'destroy']);
+    Route::post('/siswa/export', [SiswaController::class, 'exportExcel']);
 
     Route::get('/akun', [UserController::class, 'index']);
     Route::get('/akun/edit/{id}', [UserController::class, 'edit']);
